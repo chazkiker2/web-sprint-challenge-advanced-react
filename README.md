@@ -72,20 +72,20 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
     Unmounting is the death of a component. This is where the component is removed from the DOM.
 
 3. Demonstrate an understanding of class component lifecycle methods.
-    Mounting calls the following methods in order if defined, and it will call `render()` no matter what:
-      first, a `constructor()` if it exists — this is where initial state and other initial values are defined
-      then `getDerivedStateFromProps()` if it exists — this is a natural place to set the state object based on the initial props
-      `render()` is always called, but if the aforementioned are defined then rendering will occur after invoking constructor and getDerivedStateFromProps.
-      finally, `componentDidMount()` will invoke if defined — this is for running code that requires the component be in the DOM already.
-    Updating calls the following methods in order (if defined). A component Updates whenever there is a change in the component's state or props.
-      first, `getDerivedStateFromProps()` is called if defined — set state of object based on initial props
-      then, `shouldComponentUpdate()` is called if defined — returns a boolean to determine whether React should continue with the rendering or not. If not, the update cycle ends here. If so, continue on
-      thirdly, (if above are defined), `render()` will always run (unless `shouldComponentUpdate() returns false). This re-renders to the dom with all the new changes.
-      Fourthly the` getSnapShotBeforeUpdate()` method has access to props and state BEFORE the update. This should only be used in tandem with `shouldComponentUpdate`.
-      Finally the` componentDidUpdate()` method is called (if defined) after the update happens and the updated component is re-rendered to the dom. This is where you might run
-      code that is dependent on the updated component being in the DOM already.
-    Unmounting is the final phase in the lifecycle for when the component is removed from the DOM, or `unmounted` from the DOM.
-      There's only one built-in method that gets called when a component is unmounted: `componentWillUnmount()`. This is for any code to run right before a component is removed from DOM.
+      Mounting calls the following methods in order if defined, and it will call `render()` no matter what:
+    first, a `constructor()` if it exists — this is where initial state and other initial values are defined
+    then `getDerivedStateFromProps()` if it exists — this is a natural place to set the state object based on the initial props
+    `render()` is always called, but if the aforementioned are defined then rendering will occur after invoking constructor and getDerivedStateFromProps.
+    finally, `componentDidMount()` will invoke if defined — this is for running code that requires the component be in the DOM already.
+      Updating calls the following methods in order (if defined). A component Updates whenever there is a change in the component's state or props.
+    first, `getDerivedStateFromProps()` is called if defined — set state of object based on initial props
+    then, `shouldComponentUpdate()` is called if defined — returns a boolean to determine whether React should continue with the rendering or not. If not, the update cycle ends here. If so, continue on
+    thirdly, (if above are defined), `render()` will always run (unless `shouldComponentUpdate() returns false). This re-renders to the dom with all the new changes.
+    Fourthly the` getSnapShotBeforeUpdate()` method has access to props and state BEFORE the update. This should only be used in tandem with `shouldComponentUpdate`.
+    Finally the` componentDidUpdate()` method is called (if defined) after the update happens and the updated component is re-rendered to the dom. This is where you might run
+    code that is dependent on the updated component being in the DOM already.
+      Unmounting is the final phase in the lifecycle for when the component is removed from the DOM, or `unmounted` from the DOM.
+    There's only one built-in method that gets called when a component is unmounted: `componentWillUnmount()`. This is for any code to run right before a component is removed from DOM.
 
 4. Define stateful logic.
     Stateful logic is any code that uses, changes, or is in any way tied to the state of a component. Stateful logic is usually the way to define behavior and functionality for a component.
