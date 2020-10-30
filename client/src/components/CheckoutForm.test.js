@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, cleanup, fireEvent } from "@testing-library/react";
+import { render, screen, cleanup, fireEvent, within, getRoles } from "@testing-library/react";
 import CheckoutForm from "./CheckoutForm";
 
 // Write up the two tests here and make sure they are testing what the title shows
@@ -15,7 +15,7 @@ describe("checkout form functions properly", () => {
 		expect(header).toBeInTheDocument();
 	});
 
-	test("form shows success message on submit with form details", () => {
+	test("form shows success message on submit with form details", async () => {
 		render(<CheckoutForm />);
 
 		const firstNameInput = screen.getByLabelText(/first name/i);
@@ -43,9 +43,14 @@ describe("checkout form functions properly", () => {
 
 		fireEvent.click(submitButton);
 
-		const successMessage = screen.getByTestId("successMessage");
-		expect(successMessage).toBeInTheDocument();
+		const success = await screen.findByTestId("successMessage");
+		const name = success.children["4"].textContent;
+		const address = success.children["5"].textContent;
+		const cityStateZip = success.children["6"].textContent;
 
-
+		expect(success).toBeInTheDocument();
+		expect(name).toBe("First Last");
+		expect(address).toBe("123 Street St");
+		expect(cityStateZip).toBe("City, OH 12345");
 	});
 })
