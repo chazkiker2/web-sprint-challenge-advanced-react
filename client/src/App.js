@@ -45,7 +45,7 @@ function App() {
 						</li>
 					</ul>
 				</nav>
-				<Filters />
+				{/* <Filters /> */}
 				<Route
 					exact
 					path="/"

@@ -1,5 +1,11 @@
 import React from "react";
+import styled from "styled-components";
+
 import useFilters from "../hooks/useFilters";
+
+const StyledFilterContainer = styled.div`
+	background-color: white;
+`;
 
 const initialFilter = {
 	size: false,
@@ -12,12 +18,12 @@ const Filters = props => {
 	const [filter, handleFilter] = useFilters(initialFilter);
 
 	return (
-		<div>
+		<StyledFilterContainer>
 			<a onClick={handleFilter}>Size</a>
 			<a onClick={handleFilter}>Difficulty</a>
 			<a onClick={handleFilter}>Watering Level</a>
 			<a onClick={handleFilter}>Sunlight</a>
-		</div>
+		</StyledFilterContainer>
 	);
 };
 
