@@ -9,12 +9,13 @@ const useForm = (initialValue) => {
 		setValues({ ...values, [e.target.name]: e.target.value })
 	};
 
-	const handleSubmit = (e) => {
+	const handleFormSubmit = (e) => {
 		e.preventDefault();
+		setValues(initialValue);
 		setShowSuccessMessage(true);
 	}
 
-	return [showSuccessMessage, values, handleChanges, handleSubmit];
+	return [showSuccessMessage, values, handleChanges, handleFormSubmit];
 };
 
 export default useForm;

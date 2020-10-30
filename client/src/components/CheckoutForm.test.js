@@ -25,10 +25,6 @@ describe("checkout form functions properly", () => {
 		const stateInput = screen.getByLabelText(/state/i);
 		const zipInput = screen.getByLabelText(/zip/i);
 		const submitButton = screen.getByRole("button");
-		const successMessage = screen.getByTestId("successMessage");
-
-		//check that success message is NOT in document before submit
-		expect(successMessage).not.toBeInTheDocument();
 
 		expect(firstNameInput).toBeInTheDocument();
 		expect(lastNameInput).toBeInTheDocument();
@@ -47,7 +43,8 @@ describe("checkout form functions properly", () => {
 
 		fireEvent.click(submitButton);
 
-		expect(success).toBeInTheDocument();
+		const successMessage = screen.getByTestId("successMessage");
+		expect(successMessage).toBeInTheDocument();
 
 
 	});
