@@ -29,15 +29,73 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. Explain how to build stateful class components.
-    Stateful class components
+    Stateful class components are the old way of React. In the past, if a developer wanted to build a stateful component, they were required to build out a class component
+    to handle state and state-based-logic.
+    In stateful class components, the first step is adding `extends React.Component` so that the class inherits from React.Component.
+    The developer initializes state at the very start of their component. They can do this either using a `constructor()` method that first calls `super()` and then 
+    create a `state` object with whatever keys & values they want that state to hold. Or they can set state without a constructor, simply adding `state = {}` with whatever
+    keys and values they want that state to hold.
+
+    With a constructor:
+
+    ```js
+      class MyComponent extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            stateField1: "",
+            stateField2: [],
+            stateField3: {},
+          };
+        }
+      }
+    ```
+
+    Without a constructor:
+
+    ```js
+      class MyComponent extends React.Component {
+        state = {
+          stateField1: "",
+          stateField2: [],
+          stateField3: {},
+        };
+      }
+    ```
 
 2. Describe the different phases of the component lifecycle.
+    The component lifecycle comprises Mounting, Updating, and Unmounting. Mounting is the birth of the component, it is rendered on screen and thus its life begins.
+    
+    A component Updates whenever there is a change in the component's state or props. React will get a derived state from props, check to make sure the component SHOULD update. 
+    If it should update, react will re-render the component, get a snapshot before the update if the component defines a method for that, and run anything in the componentDidUpdate method if it is defined.
+
+    Unmounting is the death of a component. This is where the component is removed from the DOM.
 
 3. Demonstrate an understanding of class component lifecycle methods.
+    Mounting calls the following methods in order if defined, and it will call `render()` no matter what:
+      first, a `constructor()` if it exists — this is where initial state and other initial values are defined
+      then `getDerivedStateFromProps()` if it exists — this is a natural place to set the state object based on the initial props
+      `render()` is always called, but if the aforementioned are defined then rendering will occur after invoking constructor and getDerivedStateFromProps.
+      finally, `componentDidMount()` will invoke if defined — this is for running code that requires the component be in the DOM already.
+    Updating calls the following methods in order (if defined). A component Updates whenever there is a change in the component's state or props.
+      first, `getDerivedStateFromProps()` is called if defined — set state of object based on initial props
+      then, `shouldComponentUpdate()` is called if defined — returns a boolean to determine whether React should continue with the rendering or not. If not, the update cycle ends here. If so, continue on
+      thirdly, (if above are defined), `render()` will always run (unless `shouldComponentUpdate() returns false). This re-renders to the dom with all the new changes.
+      Fourthly the` getSnapShotBeforeUpdate()` method has access to props and state BEFORE the update. This should only be used in tandem with `shouldComponentUpdate`.
+      Finally the` componentDidUpdate()` method is called (if defined) after the update happens and the updated component is re-rendered to the dom. This is where you might run
+      code that is dependent on the updated component being in the DOM already.
+    Unmounting is the final phase in the lifecycle for when the component is removed from the DOM, or `unmounted` from the DOM.
+      There's only one built-in method that gets called when a component is unmounted: `componentWillUnmount()`. This is for any code to run right before a component is removed from DOM.
 
 4. Define stateful logic.
+    Stateful logic is any code that uses, changes, or is in any way tied to the state of a component. Stateful logic is usually the way to define behavior and functionality for a component.
+    It's the whole point of React & defining stateful logic is the sole purpose of hooks — that's what allows you to define stateful logic within a function component.
 
 5. Describe how to test a React component with React Testing Library.
+    React Testing Library (RTL) & Jest is bootstrapped with every new React project made with CRA. The main principle behind RTL is to test functionality over implementation details.
+    (Literally, if you go to their website and read about them, you'll find this quote: "The more your tests resemble the way your software is used, the more confidence they can give you.)
+    With RTL, you can define checks on the DOM before and after making changes and you can use all the nice tools in RTL to check that everything is the way it should be on your screen 
+    while also having the flexibility and freedom to spyOn your React components to track their state and understand what's happening at all times.
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 
